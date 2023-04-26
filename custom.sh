@@ -2676,6 +2676,8 @@ nvm_die_on_prefix() {
     fi
     echo "4"
   fi
+  echo "5"
+  
 }
 
 # Succeeds if $IOJS_VERSION represents an io.js version that has a
