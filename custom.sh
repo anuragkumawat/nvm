@@ -2657,20 +2657,24 @@ nvm_die_on_prefix() {
   fi
 
   local NVM_NPM_PROJECT_NPMRC
-  #NVM_NPM_PROJECT_NPMRC="$(nvm_find_project_dir)/.npmrc"
-  NVM_NPM_PROJECT_NPMRC="/home/jenkins/.nvm/.npmrc"
+  NVM_NPM_PROJECT_NPMRC="$(nvm_find_project_dir)/.npmrc"
+  #NVM_NPM_PROJECT_NPMRC="/home/jenkins/.nvm/.npmrc"
   
   echo "Testinggggg"
   if nvm_npmrc_bad_news_bears "${NVM_NPM_PROJECT_NPMRC}"; then
-    if [ "_${NVM_DELETE_PREFIX}" = "_1" ]; then
+   echo "1"
+   if [ "_${NVM_DELETE_PREFIX}" = "_1" ]; then
+      echo "2"
       npm config --loglevel=warn delete prefix
       npm config --loglevel=warn delete globalconfig
     else
+      echo "3"
       nvm_err "Your project npmrc file ($(nvm_sanitize_path "${NVM_NPM_PROJECT_NPMRC}"))"
       nvm_err 'has a `globalconfig` and/or a `prefix` setting, which are incompatible with nvm.'
       nvm_err "Run \`${NVM_COMMAND}\` to unset it."
       return 10
     fi
+    echo "4"
   fi
 }
 
