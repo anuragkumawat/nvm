@@ -2657,7 +2657,9 @@ nvm_die_on_prefix() {
   fi
 
   local NVM_NPM_PROJECT_NPMRC
-  NVM_NPM_PROJECT_NPMRC="$(nvm_find_project_dir)/.npmrc"
+  #NVM_NPM_PROJECT_NPMRC="$(nvm_find_project_dir)/.npmrc"
+  NVM_NPM_PROJECT_NPMRC="/home/jenkins/.nvm/.npmrc"
+  
   echo "Testinggggg"
   if nvm_npmrc_bad_news_bears "${NVM_NPM_PROJECT_NPMRC}"; then
     if [ "_${NVM_DELETE_PREFIX}" = "_1" ]; then
