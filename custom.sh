@@ -3655,6 +3655,9 @@ nvm() {
       fi
       local NVM_USE_OUTPUT
       NVM_USE_OUTPUT=''
+      echo "12"
+      echo "${NVM_SILENT}"
+      echo "${NVM_SILENT:-0}"
       if [ "${NVM_SILENT:-0}" -ne 1 ]; then
         echo "8"
         if nvm_is_iojs_version "${VERSION}"; then
