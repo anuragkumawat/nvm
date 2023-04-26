@@ -3676,6 +3676,8 @@ nvm() {
         fi
         echo "6"
       fi
+      echo "7"
+      echo "${NVM_USE_OUTPUT-}"
       if [ -n "${NVM_USE_OUTPUT-}" ] && [ "${NVM_SILENT:-0}" -ne 1 ]; then
         nvm_echo "${NVM_USE_OUTPUT}"
       fi
