@@ -3656,11 +3656,15 @@ nvm() {
       local NVM_USE_OUTPUT
       NVM_USE_OUTPUT=''
       if [ "${NVM_SILENT:-0}" -ne 1 ]; then
+        echo "8"
         if nvm_is_iojs_version "${VERSION}"; then
+          echo "9"
           NVM_USE_OUTPUT="Now using io.js $(nvm_strip_iojs_prefix "${VERSION}")$(nvm_print_npm_version)"
         else
+          echo "10"
           NVM_USE_OUTPUT="Now using node ${VERSION}$(nvm_print_npm_version)"
         fi
+        echo "11"
       fi
       if [ "_${VERSION}" != "_system" ]; then
         local NVM_USE_CMD
@@ -3678,6 +3682,8 @@ nvm() {
       fi
       echo "7"
       echo "${NVM_USE_OUTPUT-}"
+      echo "${NVM_USE_OUTPUT}"
+
       if [ -n "${NVM_USE_OUTPUT-}" ] && [ "${NVM_SILENT:-0}" -ne 1 ]; then
         nvm_echo "${NVM_USE_OUTPUT}"
       fi
