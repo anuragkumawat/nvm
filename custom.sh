@@ -11,6 +11,8 @@
 { # this ensures the entire script is downloaded #
 
 # shellcheck disable=SC3028
+
+echo "Anurag Kumawat"
 NVM_SCRIPT_SOURCE="$_"
 
 nvm_is_zsh() {
