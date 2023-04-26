@@ -2658,6 +2658,7 @@ nvm_die_on_prefix() {
 
   local NVM_NPM_PROJECT_NPMRC
   NVM_NPM_PROJECT_NPMRC="$(nvm_find_project_dir)/.npmrc"
+  echo "Testing"
   if nvm_npmrc_bad_news_bears "${NVM_NPM_PROJECT_NPMRC}"; then
     if [ "_${NVM_DELETE_PREFIX}" = "_1" ]; then
       npm config --loglevel=warn delete prefix
