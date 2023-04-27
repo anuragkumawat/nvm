@@ -3687,9 +3687,11 @@ nvm() {
       echo "${NVM_USE_OUTPUT-}"
       echo "${NVM_USE_OUTPUT}"
 
-      if [ -n "${NVM_USE_OUTPUT}" ] && [ "${NVM_SILENT:-0}" -ne 1 ]; then
+      if [ -n "${NVM_USE_OUTPUT-}" ] && [ "${NVM_SILENT:-0}" -ne 1 ]; then
+        echo "14"
         nvm_echo "${NVM_USE_OUTPUT}"
       fi
+      echo "13"
     ;;
     "run")
       local provided_version
