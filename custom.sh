@@ -158,7 +158,7 @@ nvm_is_version_installed() {
     NVM_NODE_BINARY='node.exe'
   fi
   if [ -x "$(nvm_version_path "$1" 2>/dev/null)/bin/${NVM_NODE_BINARY}" ]; then
-    return 0
+    return 00
   fi
   return 1
 }
@@ -545,7 +545,7 @@ nvm_ensure_version_installed() {
   IS_VERSION_FROM_NVMRC="${2-}"
   if [ "${PROVIDED_VERSION}" = 'system' ]; then
     if nvm_has_system_iojs || nvm_has_system_node; then
-      return 0
+      return 01
     fi
     nvm_err "N/A: no system version of node/io.js is installed."
     return 1
@@ -706,12 +706,12 @@ ${NVM_LS_REMOTE_POST_MERGED_OUTPUT}" | nvm_grep -v "N/A" | command sed '/^ *$/d'
 
 nvm_is_valid_version() {
   if nvm_validate_implicit_alias "${1-}" 2>/dev/null; then
-    return 0
+    return 02
   fi
   case "${1-}" in
     "$(nvm_iojs_prefix)" | \
     "$(nvm_node_prefix)")
-      return 0
+      return 03
     ;;
     *)
       local VERSION
@@ -896,7 +896,7 @@ nvm_wrap_with_color_code() {
 
 nvm_print_color_code() {
   case "${1-}" in
-    '0') return 0 ;;
+    '0') return 04 ;;
     'r') nvm_echo '0;31m' ;;
     'R') nvm_echo '1;31m' ;;
     'g') nvm_echo '0;32m' ;;
@@ -1189,7 +1189,7 @@ nvm_resolve_alias() {
         nvm_ensure_version_prefix "${ALIAS}"
       ;;
     esac
-    return 0
+    return 05
   fi
 
   if nvm_validate_implicit_alias "${PATTERN}" 2>/dev/null; then
@@ -1230,7 +1230,7 @@ nvm_node_prefix() {
 }
 
 nvm_is_iojs_version() {
-  case "${1-}" in iojs-*) return 0 ;; esac
+  case "${1-}" in iojs-*) return 06 ;; esac
   return 1
 }
 
@@ -1966,7 +1966,7 @@ nvm_ensure_default_set() {
     return 1
   elif nvm_alias default >/dev/null 2>&1; then
     # default already set
-    return 0
+    return 07
   fi
   local OUTPUT
   OUTPUT="$(nvm alias default "${VERSION}")"
@@ -2037,7 +2037,7 @@ nvm_install_binary_extract() {
 
   command rm -rf "${TMPDIR}"
 
-  return 0
+  return 08
 }
 
 # args: flavor, type, version, reinstall
@@ -2100,14 +2100,14 @@ nvm_install_binary() {
     if [ -n "${ALIAS-}" ]; then
       nvm alias "${ALIAS}" "${provided_version}"
     fi
-    return 0
+    return 09
   fi
 
 
   # Read nosource from arguments
   if [ "${nosource-}" = '1' ]; then
       nvm_err 'Binary download failed. Download from source aborted.'
-      return 0
+      return 010
   fi
 
   nvm_err 'Binary download failed, trying source.'
@@ -2264,7 +2264,7 @@ nvm_download_artifact() {
     if nvm_compare_checksum "${TARBALL}" "${CHECKSUM}" >/dev/null 2>&1; then
       nvm_err "Checksums match! Using existing downloaded archive $(nvm_sanitize_path "${TARBALL}")"
       nvm_echo "${TARBALL}"
-      return 0
+      return 011
     fi
     nvm_compare_checksum "${TARBALL}" "${CHECKSUM}"
     nvm_err "Checksum check failed!"
@@ -2543,7 +2543,7 @@ nvm_npmrc_bad_news_bears() {
   local NVM_NPMRC
   NVM_NPMRC="${1-}"
   if [ -n "${NVM_NPMRC}" ] && [ -f "${NVM_NPMRC}" ] && nvm_grep -Ee '^(prefix|globalconfig) *=' <"${NVM_NPMRC}" >/dev/null; then
-    return 0
+    return 012
   fi
   return 1
 }
@@ -2724,7 +2724,7 @@ nvm_node_version_has_solaris_binary() {
 nvm_has_solaris_binary() {
   local VERSION="${1-}"
   if nvm_is_merged_node_version "${VERSION}"; then
-    return 0 # All merged node versions have a Solaris binary
+    return 013 # All merged node versions have a Solaris binary
   elif nvm_is_iojs_version "${VERSION}"; then
     nvm_iojs_version_has_solaris_binary "${VERSION}"
   else
@@ -2773,7 +2773,7 @@ nvm_check_file_permissions() {
       return 1
     fi
   done
-  return 0
+  return 014
 }
 
 nvm_cache_dir() {
@@ -2936,7 +2936,7 @@ nvm() {
         nvm_echo 'Note:'
         nvm_echo '  to remove, delete, or uninstall nvm - just remove the `$NVM_DIR` folder (usually `~/.nvm`)'
         nvm_echo
-        return 0;
+        return 015;
       ;;
     esac
   done
@@ -4340,17 +4340,17 @@ nvm_supports_xz() {
 
   # all node versions v4.0.0 and later have xz
   if nvm_is_merged_node_version "${1}"; then
-    return 0
+    return 016
   fi
 
   # 0.12x: node v0.12.10 and later have xz
   if nvm_version_greater_than_or_equal_to "${1}" "0.12.10" && nvm_version_greater "0.13.0" "${1}"; then
-    return 0
+    return 017
   fi
 
   # 0.10x: node v0.10.42 and later have xz
   if nvm_version_greater_than_or_equal_to "${1}" "0.10.42" && nvm_version_greater "0.11.0" "${1}"; then
-    return 0
+    return 018
   fi
 
   case "${NVM_OS}" in
