@@ -12,7 +12,6 @@
 
 # shellcheck disable=SC3028
 
-#echo "Anurag Kumawat"
 NVM_SCRIPT_SOURCE="$_"
 
 nvm_is_zsh() {
@@ -2781,14 +2780,19 @@ nvm_cache_dir() {
 }
 
 nvm() {
+   echo "16"
   if [ "$#" -lt 1 ]; then
     nvm --help
     return
   fi
 
+   echo "17"
   local DEFAULT_IFS
-  DEFAULT_IFS=" $(nvm_echo t | command tr t \\t)
-"
+  DEFAULT_IFS=" $(nvm_echo t | command tr t \\t)"
+
+  echo $DEFAULT_IFS
+  echo "$-"
+  
   if [ "${-#*e}" != "$-" ]; then
     set +e
     local EXIT_CODE
