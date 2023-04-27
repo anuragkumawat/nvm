@@ -2795,6 +2795,7 @@ nvm() {
     IFS="${DEFAULT_IFS}" nvm "$@"
     EXIT_CODE="$?"
     set -e
+    echo "15"
     return "$EXIT_CODE"
   elif [ "${-#*a}" != "$-" ]; then
     set +a
